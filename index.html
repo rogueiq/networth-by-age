@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+  index.html: the page itself. It holds the text and the empty boxes
+  that app.js fills in. style.css makes it look good. data.js holds the numbers.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page fit phone screens instead of showing a shrunken desktop page -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Net Worth by Age Checker | @rogueiq</title>
+  <meta name="description" content="See how your net worth compares with US families your age, using the Federal Reserve's 2025 Survey of Consumer Finances.">
+
+  <!-- Inter font from Google Fonts. Only the font file is downloaded; nothing you type is sent. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tiny built-in icon for the browser tab (a green dot), so no extra file is needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%2300e676%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <span class="tag">@rogueiq</span>
+  </header>
+
+  <main class="container">
+    <!-- ===== Intro ===== -->
+    <section class="hero">
+      <p class="eyebrow">Net worth by age</p>
+      <h1>Where do you stand vs. US families your age?</h1>
+      <p class="lede">
+        Compare your net worth with the Federal Reserve's newest
+        Survey of Consumer Finances (2025).
+      </p>
+    </section>
+
+    <!-- ===== The form ===== -->
+    <!-- No "action" on this form: submitting it never leaves your browser. -->
+    <form id="checker" class="card" novalidate>
+      <div class="field">
+        <label for="age">Your age</label>
+        <input id="age" type="number" inputmode="numeric" min="18" max="110" placeholder="e.g. 34" autocomplete="off">
+        <p class="hint">Or pick an age group:</p>
+        <!-- app.js adds one button per age group here -->
+        <div id="bracket-buttons" class="chips" role="group" aria-label="Age group"></div>
+      </div>
+
+      <!-- "Compare against": optional ONE extra filter on top of age (no stacking) -->
+      <div class="field">
+        <label for="compare">Compare against</label>
+        <select id="compare">
+          <option value="">All families my age</option>
+          <!-- app.js adds one option per filter here -->
+        </select>
+        <!-- app.js puts the choices for the picked filter here (e.g. "Couple" / "Single") -->
+        <div id="filter-options" class="chips" role="group" aria-label="Filter choice" hidden></div>
+
+        <!-- Only shown for the income filter -->
+        <div id="income-field" class="subfield" hidden>
+          <label for="income">Household income in 2024, before taxes (US $)</label>
+          <input id="income" type="text" inputmode="decimal" placeholder="e.g. 85,000" autocomplete="off">
+          <p class="hint">Total from all sources for you and family living with you. The 2025 survey asked about 2024 income.</p>
+          <p id="income-group" class="hint accent"></p>
+        </div>
+
+        <!-- Explains greyed-out choices, e.g. "Retired: not enough survey data under 45" -->
+        <p id="filter-note" class="hint" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="networth">Your net worth (US $)</label>
+        <input id="networth" type="text" inputmode="decimal" placeholder="e.g. 150,000" autocomplete="off">
+        <p class="hint">What you own (cash, investments, home, retirement accounts, business) minus what you owe. Can be negative.</p>
+      </div>
+
+      <p id="form-error" class="error" role="alert" hidden></p>
+      <button type="submit" class="btn">Check where I stand</button>
+      <p class="privacy">🔒 Everything runs in your browser. Nothing you type is sent or saved anywhere.</p>
+    </form>
+
+    <!-- ===== Results (hidden until the form is submitted) ===== -->
+    <section id="results" class="card results" hidden aria-live="polite">
+      <p class="eyebrow" id="result-bracket"></p>
+      <p class="big" id="result-headline"></p>
+      <p class="sub" id="result-detail"></p>
+      <!-- Plain-language note when we had to widen the age group (filtered views only) -->
+      <p id="result-notice" class="notice" hidden></p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Median</span>
+          <span class="stat-value" id="stat-median"></span>
+          <span class="stat-note">the family in the middle</span>
+        </div>
+        <div class="stat" id="stat-mean-box">
+          <span class="stat-label">Mean (average)</span>
+          <span class="stat-value" id="stat-mean"></span>
+          <span class="stat-note">pulled up by the very wealthy</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">You</span>
+          <span class="stat-value accent" id="stat-you"></span>
+          <span class="stat-note" id="stat-you-note"></span>
+        </div>
+      </div>
+
+      <h2 class="chart-title">Net worth at each percentile, <span id="chart-bracket"></span></h2>
+      <!-- app.js draws the chart inside this box using SVG -->
+      <div id="chart" class="chart"></div>
+      <p class="chart-note">
+        Read it left to right: the line shows the net worth of the family at each percentile,
+        from poorest (left) to richest (right). The scale is compressed so $1K and $10M fit on one chart.
+      </p>
+
+      <table class="cuts">
+        <caption id="cuts-caption">Percentile cut-offs for this age group</caption>
+        <thead><tr><th>Percentile</th><th>Net worth</th></tr></thead>
+        <tbody id="cuts-body"></tbody>
+      </table>
+
+      <p class="footnote" id="sample-note" hidden></p>
+      <p class="footnote" id="report-footnote"></p>
+    </section>
+
+    <!-- ===== Email signup placeholder (NOT connected to anything yet) ===== -->
+    <section class="card signup">
+      <h2>Get the weekly breakdown</h2>
+      <p>Charts and plain-English explainers on long-term investing, from @rogueiq.</p>
+      <!-- PLACEHOLDER: this form is not wired up. It sends nothing and saves nothing. -->
+      <form id="signup" class="signup-row" novalidate>
+        <input type="email" placeholder="you@example.com" aria-label="Email address" autocomplete="off">
+        <button type="submit" class="btn btn-outline">Notify me</button>
+      </form>
+      <p id="signup-msg" class="hint" role="status">Coming soon. Signup isn't connected yet, so nothing is sent.</p>
+    </section>
+
+    <!-- ===== Disclaimer + sources ===== -->
+    <footer class="footer">
+      <p class="disclaimer">
+        <strong>For education only. Not financial advice.</strong>
+        This tool shows how survey data is distributed. It does not judge your finances
+        or tell you what to do with your money.
+      </p>
+      <p>
+        Source: Board of Governors of the Federal Reserve System,
+        <a href="https://www.federalreserve.gov/econres/scfindex.htm" target="_blank" rel="noopener">2025 Survey of Consumer Finances</a>
+        (released Oct 9, 2026). All figures in <strong>2025 dollars</strong>, by age of the family's reference person.
+        Median and mean:
+        <a href="https://www.federalreserve.gov/econres/files/scf2025_tables_public_real_historical.xlsx" target="_blank" rel="noopener">SCF historical tables (public data), Table 4</a>.
+        Percentiles: computed by @rogueiq from the Fed's
+        <a href="https://www.federalreserve.gov/econres/files/scfp2025excel.zip" target="_blank" rel="noopener">2025 SCF Summary Extract</a>
+        using the survey weights (the same method reproduces the Fed's Table 4 medians and means).
+        The Fed does not publish percentile cut-offs by age. The SCF excludes the Forbes 400.
+        "Compare against" filters (couple/single, kids, home, education, 2024 income, work status) are
+        also computed by @rogueiq from the Summary Extract. Groups with fewer than 100 survey families are
+        widened or not shown. Official all-ages figures in the footnotes are from Table 4.
+      </p>
+      <p class="tag">@rogueiq</p>
+    </footer>
+  </main>
+
+  <!-- Load the data first, then the code that uses it -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
