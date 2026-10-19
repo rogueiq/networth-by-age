@@ -197,3 +197,6 @@ select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-col
   .signup-row .btn { width: auto; white-space: nowrap; }
   .btn { width: auto; }
 }
+
+/* "For AI agents" footer link */
+.agents { font-size: 13px; opacity: 0.8; }
