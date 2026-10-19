@@ -43,6 +43,7 @@
       <div class="field">
         <label for="age">Your age</label>
         <input id="age" type="number" inputmode="numeric" min="18" max="110" placeholder="e.g. 34" autocomplete="off">
+        <div class="slider-row"><input id="age-slider" class="slider" type="range" min="18" max="95" step="1" value="35" aria-label="Age slider (type ages over 95 in the box)"><output id="age-out" for="age-slider" class="slider-out"></output></div>
         <p class="hint">Or pick an age group:</p>
         <!-- app.js adds one button per age group here -->
         <div id="bracket-buttons" class="chips" role="group" aria-label="Age group"></div>
@@ -62,6 +63,7 @@
         <div id="income-field" class="subfield" hidden>
           <label for="income">Household income in 2024, before taxes (US $)</label>
           <input id="income" type="text" inputmode="decimal" placeholder="e.g. 85,000" autocomplete="off">
+          <div class="slider-row"><input id="income-slider" class="slider" type="range" aria-label="Household income slider"><output id="income-out" for="income-slider" class="slider-out"></output></div>
           <p class="hint">Total from all sources for you and family living with you. The 2025 survey asked about 2024 income.</p>
           <p id="income-group" class="hint accent"></p>
         </div>
@@ -73,6 +75,8 @@
       <div class="field">
         <label for="networth">Your net worth (US $)</label>
         <input id="networth" type="text" inputmode="decimal" placeholder="e.g. 150,000" autocomplete="off">
+        <div class="slider-row"><input id="networth-slider" class="slider" type="range" aria-label="Net worth slider, from -$1M to $50M+ in uneven steps"><output id="networth-out" for="networth-slider" class="slider-out"></output></div>
+        <p class="hint">Slide for a quick answer, or type an exact amount. The slider takes bigger steps at higher amounts.</p>
         <p class="hint">What you own (cash, investments, home, retirement accounts, business) minus what you owe. Can be negative.</p>
       </div>
 

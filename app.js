@@ -127,8 +127,15 @@ ageInput.addEventListener("input", () => {
 });
 
 // ---------- When the form is submitted ----------
+// "live" = called by a slider or typing (no error messages, no scrolling).
+// Pressing the button calls it with live = false.
+let liveRun = false;
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // stop the browser from reloading the page
+  run(false);
+});
+function run(live) {
+  liveRun = live;
   errorBox.hidden = true;
 
   // 1. Work out the age group
@@ -162,9 +169,10 @@ form.addEventListener("submit", (event) => {
   const result = resolveCell(filter, option, bracket.id);
   if (!result.ok) return showError(unavailableMessage(filter, option, result));
   showFilteredResults(bracket, filter, option, result, netWorth);
-});
+}
 
 function showError(message) {
+  if (liveRun) return; // while sliding, just wait for a complete answer
   errorBox.textContent = message;
   errorBox.hidden = false;
 }
@@ -213,7 +221,7 @@ function showResults(bracket, netWorth) {
   drawChart(cuts, netWorth, bracket.median);
 
   results.hidden = false;
-  results.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!liveRun) results.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // ---------- Percentile table ----------
@@ -557,5 +565,68 @@ function showFilteredResults(bracket, filter, option, result, netWorth) {
   }
 
   results.hidden = false;
-  results.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!liveRun) results.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// =====================================================================
+// Sliders: each one is paired with its typed field and kept in sync.
+// They only fill in the typed fields; the math above is unchanged.
+// =====================================================================
+// Net worth / income use uneven steps so small amounts are easy to pick:
+// finer steps near zero, bigger steps for millions. Typing stays exact.
+function moneySteps(withNegatives, top) {
+  const steps = withNegatives ? [-1e6, -500e3, -250e3, -100e3, -50e3, -25e3, -10e3, -5e3, -1e3, 0] : [0];
+  const mult = [1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 7.5];
+  for (let d = 1e3; d < top; d *= 10) mult.forEach((m) => { if (d * m <= top) steps.push(d * m); });
+  if (steps[steps.length - 1] !== top) steps.push(top);
+  return steps;
+}
+const NW_STEPS = moneySteps(true, 50e6);   // -$1M ... $50M (type any bigger number)
+const INC_STEPS = moneySteps(false, 2e6);  // $0 ... $2M
+function nearestStep(steps, v) {
+  let best = 0;
+  steps.forEach((s, i) => { if (Math.abs(s - v) < Math.abs(steps[best] - v)) best = i; });
+  return best;
+}
+function sliderLabel(steps, i, text) {
+  const v = steps[i];
+  return (i === steps.length - 1 ? formatShort(v) + "+" : i === 0 && v < 0 ? formatShort(v) + " or less" : formatShort(v));
+}
+function liveUpdate() {
+  // Only update once there's an age (or group) and a net worth; never show errors mid-slide
+  if ((selectedBracketId || ageInput.value) && netWorthInput.value) run(true);
+}
+function pairMoney(slider, input, steps, out, defaultV) {
+  slider.min = 0; slider.max = steps.length - 1; slider.step = 1;
+  const sync = () => {
+    const v = parseMoney(input.value);
+    slider.value = nearestStep(steps, v === null ? defaultV : v);
+    out.textContent = v === null ? "" : formatMoney(v);
+  };
+  slider.addEventListener("input", () => {
+    const v = steps[Number(slider.value)];
+    input.value = v.toLocaleString("en-US");
+    out.textContent = sliderLabel(steps, Number(slider.value));
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  input.addEventListener("input", (e) => { if (e.isTrusted) sync(); liveUpdate(); });
+  sync();
+}
+const ageSlider = document.getElementById("age-slider");
+const ageOut = document.getElementById("age-out");
+function syncAgeSlider() {
+  const a = Number(ageInput.value);
+  if (ageInput.value && Number.isFinite(a)) ageSlider.value = Math.min(95, Math.max(18, Math.floor(a)));
+  ageOut.textContent = ageInput.value ? ageInput.value : "";
+}
+ageSlider.addEventListener("input", () => {
+  ageInput.value = ageSlider.value;
+  ageInput.dispatchEvent(new Event("input", { bubbles: true }));
+});
+ageInput.addEventListener("input", () => { syncAgeSlider(); liveUpdate(); });
+bracketButtons.addEventListener("click", () => { ageOut.textContent = ""; liveUpdate(); });
+compareSelect.addEventListener("change", liveUpdate);
+filterOptionsBox.addEventListener("click", liveUpdate);
+pairMoney(document.getElementById("networth-slider"), netWorthInput, NW_STEPS, document.getElementById("networth-out"), 0);
+pairMoney(document.getElementById("income-slider"), incomeInput, INC_STEPS, document.getElementById("income-out"), 0);
+syncAgeSlider();
