@@ -280,34 +280,34 @@ function drawChart(cuts, netWorth, median, pLo = 1, pHi = 99) {
   const ticks = [-1e6, -1e5, -1e4, 0, 1e4, 1e5, 1e6, 1e7, 1e8]
     .filter((t) => squash(t) >= yMin - 0.01 && squash(t) <= yMax + 0.01);
   const grid = ticks.map((t) =>
-    `<line x1="${pad.left}" x2="${W - pad.right}" y1="${y(t)}" y2="${y(t)}" stroke="#262626"/>` +
-    `<text x="${pad.left - 8}" y="${y(t) + 4}" text-anchor="end" fill="#9a9a9a" font-size="12">${formatShort(t)}</text>`
+    `<line x1="${pad.left}" x2="${W - pad.right}" y1="${y(t)}" y2="${y(t)}" stroke="#1f2326"/>` +
+    `<text x="${pad.left - 8}" y="${y(t) + 4}" text-anchor="end" fill="#9A948C" font-size="12">${formatShort(t)}</text>`
   ).join("");
 
   // X-axis labels
   const xLabels = [...new Set([pLo, 25, 50, 75, pHi])].filter((p) => p >= pLo && p <= pHi).map((p) =>
-    `<text x="${x(p)}" y="${H - pad.bottom + 18}" text-anchor="middle" fill="#9a9a9a" font-size="12">${ordinal(p)}</text>`
+    `<text x="${x(p)}" y="${H - pad.bottom + 18}" text-anchor="middle" fill="#9A948C" font-size="12">${ordinal(p)}</text>`
   ).join("") +
-    `<text x="${pad.left + innerW / 2}" y="${H - 4}" text-anchor="middle" fill="#9a9a9a" font-size="12">Percentile within age group</text>`;
+    `<text x="${pad.left + innerW / 2}" y="${H - 4}" text-anchor="middle" fill="#9A948C" font-size="12">Percentile within age group</text>`;
 
   // Median marker (dashed vertical line at the 50th percentile)
   const medianMark =
-    `<line x1="${x(50)}" x2="${x(50)}" y1="${pad.top}" y2="${pad.top + innerH}" stroke="#ffffff" stroke-opacity="0.35" stroke-dasharray="4 4"/>` +
-    `<text x="${x(50) + 6}" y="${pad.top + 12}" fill="#ffffff" fill-opacity="0.7" font-size="12">Median ${formatShort(median)}</text>`;
+    `<line x1="${x(50)}" x2="${x(50)}" y1="${pad.top}" y2="${pad.top + innerH}" stroke="#F5EFE6" stroke-opacity="0.35" stroke-dasharray="4 4"/>` +
+    `<text x="${x(50) + 6}" y="${pad.top + 12}" fill="#F5EFE6" fill-opacity="0.7" font-size="12">Median ${formatShort(median)}</text>`;
 
   // "You" marker (accent dot + label). Flip the label left if it's near the right edge.
   const yx = x(youX), yy = y(netWorth);
   const labelLeft = youX > pLo + 0.7 * (pHi - pLo);
   const youMark =
-    `<circle cx="${yx}" cy="${yy}" r="7" style="fill: var(--accent)" stroke="#000" stroke-width="2"/>` +
-    `<text x="${yx + (labelLeft ? -12 : 12)}" y="${yy - 10}" text-anchor="${labelLeft ? "end" : "start"}" style="fill: var(--accent)" font-size="14" font-weight="700">You${offChart}</text>`;
+    `<circle cx="${yx}" cy="${yy}" r="7" fill="#F5EFE6" stroke="#07090A" stroke-width="2"/>` +
+    `<text x="${yx + (labelLeft ? -12 : 12)}" y="${yy - 10}" text-anchor="${labelLeft ? "end" : "start"}" fill="#F5EFE6" font-size="14" font-weight="700">You${offChart}</text>`;
 
   document.getElementById("chart").innerHTML =
     `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Net worth by percentile for this age group, with a marker for you">
       ${grid}${medianMark}
-      <path d="${path}" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+      <path d="${path}" fill="none" style="stroke: var(--accent)" stroke-width="2.5"/>
       ${youMark}${xLabels}
-      <text x="${W - pad.right}" y="${H - pad.bottom - 6}" text-anchor="end" fill="#9a9a9a" font-size="11">@rogueiq · Source: Federal Reserve SCF 2025</text>
+      <text x="${W - pad.right}" y="${H - pad.bottom - 6}" text-anchor="end" fill="#9A948C" font-size="11">@rogueiq · Source: Federal Reserve SCF 2025</text>
     </svg>`;
 }
 

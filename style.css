@@ -6,12 +6,18 @@
 
 /* ---- Brand settings. Change the accent here and it updates everywhere. ---- */
 :root {
-  --bg: #000000;          /* black background */
-  --text: #ffffff;        /* white text */
-  --muted: #9a9a9a;       /* grey for secondary text */
-  --line: #262626;        /* thin borders */
-  --card: #0b0b0b;        /* very dark card background */
-  --accent: #00e676;      /* the ONE accent color (green) */
+  /* RogueIQ brand tokens: Cyan + Ember (same as rogueiq.com) */
+  --bg: #07090A;          /* near-black background */
+  --text: #F5EFE6;        /* warm off-white text */
+  --muted: #9A948C;       /* secondary text */
+  --line: #1f2326;        /* thin borders */
+  --card: #0d1012;        /* dark card background */
+  --accent: #22E6D0;      /* acid cyan: buttons, links, chart line */
+  --accent-deep: #0EA5A4; /* deep cyan */
+  --accent-ink: #07090A;  /* text on cyan */
+  --gradient: linear-gradient(90deg, var(--accent-deep), var(--accent)); /* sparingly */
+  --ember: #FF7A1A;       /* ONE highlight: the main result line */
+  --field: #050607;
   --radius: 14px;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -77,8 +83,8 @@ input {
   font: inherit;
   font-size: 18px;               /* 16px+ stops iPhones from zooming in on tap */
   color: var(--text);
-  background: #000;
-  border: 1px solid #3a3a3a;
+  background: var(--field);
+  border: 1px solid #2c3236;
   border-radius: 10px;
   padding: 12px 14px;
 }
@@ -91,8 +97,8 @@ select {
   font: inherit;
   font-size: 17px;
   color: var(--text);
-  background: #000;
-  border: 1px solid #3a3a3a;
+  background: var(--field);
+  border: 1px solid #2c3236;
   border-radius: 10px;
   padding: 12px 14px;
   appearance: none;               /* remove the default grey look */
@@ -108,7 +114,7 @@ select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-col
 /* Plain-language notice when the age group was widened */
 .notice {
   border-left: 3px solid var(--accent);
-  background: #101010;
+  background: var(--card);
   padding: 10px 12px;
   border-radius: 6px;
   font-size: 14px;
@@ -122,20 +128,20 @@ select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-col
   font-size: 14px;
   color: var(--text);
   background: transparent;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #2c3236;
   border-radius: 999px;
   padding: 8px 14px;
   cursor: pointer;
 }
 .chip:disabled { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
-.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
 
 .btn {
   width: 100%;
   font: inherit;
   font-weight: 700;
   font-size: 16px;
-  color: #000;
+  color: var(--accent-ink);
   background: var(--accent);
   border: 0;
   border-radius: 10px;
@@ -205,9 +211,15 @@ select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-col
 .slider-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
 .slider-out { min-width: 72px; text-align: right; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 .slider { flex: 1; -webkit-appearance: none; appearance: none; height: 36px; background: transparent; margin: 0; touch-action: pan-y; }
-.slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: #2a2a2a; }
-.slider::-moz-range-track { height: 6px; border-radius: 3px; background: #2a2a2a; }
-.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; margin-top: -12px; border-radius: 50%; background: var(--accent); border: 3px solid #000; box-shadow: 0 0 0 1px var(--accent); cursor: pointer; }
-.slider::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid #000; cursor: pointer; }
+.slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: #262b2e; }
+.slider::-moz-range-track { height: 6px; border-radius: 3px; background: #262b2e; }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; margin-top: -12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); cursor: pointer; }
+.slider::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); cursor: pointer; }
 .slider:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
 input.slider{border:0 !important;background:transparent !important;padding:0 !important;min-height:0 !important;box-shadow:none !important;width:auto}
+
+/* ---- Cyan + Ember ---- */
+.big { color: var(--ember); }  /* the single ember highlight */
+.wordmark { font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+.wordmark span { color: var(--accent); }
+.hero h1 { background: linear-gradient(90deg, var(--text) 55%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
