@@ -210,3 +210,4 @@ select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-col
 .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; margin-top: -12px; border-radius: 50%; background: var(--accent); border: 3px solid #000; box-shadow: 0 0 0 1px var(--accent); cursor: pointer; }
 .slider::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid #000; cursor: pointer; }
 .slider:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+input.slider{border:0 !important;background:transparent !important;padding:0 !important;min-height:0 !important;box-shadow:none !important;width:auto}
