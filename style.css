@@ -235,3 +235,21 @@ input.slider{border:0 !important;background:transparent !important;padding:0 !im
 h1,h2,h3{font-family:'Archivo',var(--font);font-stretch:100%}h1{font-weight:800;letter-spacing:-.03em}h2,h3{font-weight:700}
 body{background-image:radial-gradient(60rem 32rem at 30% -8rem,rgba(34,230,208,.08),transparent 70%),radial-gradient(28rem 18rem at 85% 4rem,rgba(255,106,26,.04),transparent 70%);background-repeat:no-repeat}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---- Server-rendered tables, FAQ, methodology (build_page.py) ---- */
+.prose h2 { font-size: 20px; margin: 22px 0 10px; }
+.prose h2:first-of-type { margin-top: 6px; }
+.prose h3 { font-size: 16px; margin: 16px 0 4px; }
+.prose p, .prose li { color: var(--text); font-size: 15px; }
+.prose ul { padding-left: 20px; }
+.prose .src { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.stat-line { border-left: 3px solid var(--accent); padding-left: 12px; }
+.tablewrap { overflow-x: auto; }
+.cuts.data td, .cuts.data th { text-align: right; padding: 7px 8px; white-space: nowrap; }
+.cuts.data td:first-child, .cuts.data th:first-child { text-align: left; padding-left: 0; }
+.updated { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.links-top { font-size: 14px; color: var(--muted); }
+.links-top a { color: var(--accent); }
+.cite { background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 12px; font-size: 14px; }
+.eyebrow a { color: inherit; text-decoration: none; }
+a.btn { display: inline-block; text-decoration: none; text-align: center; }

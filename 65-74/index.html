@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+  index.html: the page itself. It holds the text and the empty boxes
+  that app.js fills in. style.css makes it look good. data.js holds the numbers.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page fit phone screens instead of showing a shrunken desktop page -->
+  <meta name="theme-color" content="#07090A">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Net Worth Ages 65–74: 2025 Fed Data | RogueIQ</title>
+  <meta name="description" content="Median net worth for U.S. families aged 65–74 was $431,300 in 2025 (Fed SCF, released Oct 9, 2026), plus percentiles computed by RogueIQ.">
+  <link rel="canonical" href="https://rogueiq.com/net-worth-by-age/65-74/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RogueIQ">
+  <meta property="og:title" content="Net Worth Ages 65–74: 2025 Fed Data | RogueIQ">
+  <meta property="og:description" content="Median net worth for U.S. families aged 65–74 was $431,300 in 2025 (Fed SCF, released Oct 9, 2026), plus percentiles computed by RogueIQ.">
+  <meta property="og:url" content="https://rogueiq.com/net-worth-by-age/65-74/">
+  <meta property="og:image" content="https://rogueiq.com/wire/icons/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@rogueiq">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://rogueiq.com/net-worth-by-age/#app", "name": "Net Worth by Age Checker", "url": "https://rogueiq.com/net-worth-by-age/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires JavaScript", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "@id": "https://rogueiq.com/#org", "name": "RogueIQ", "url": "https://rogueiq.com/"}, "isBasedOn": {"@id": "https://rogueiq.com/net-worth-by-age/#data"}, "dateModified": "2026-10-22"}, {"@type": "Dataset", "@id": "https://rogueiq.com/net-worth-by-age/#data", "name": "U.S. family net worth by age: medians, means and percentiles (2025 SCF)", "description": "Median and mean net worth by age of reference person from the Federal Reserve's 2025 Survey of Consumer Finances, plus weighted percentiles computed by RogueIQ from the public Summary Extract. 2025 dollars.", "url": "https://rogueiq.com/net-worth-by-age/", "temporalCoverage": "2025", "spatialCoverage": {"@type": "Place", "name": "United States"}, "variableMeasured": ["Median net worth", "Mean net worth", "Net worth percentiles (p25, p50, p75, p90, p99)"], "creator": [{"@type": "Organization", "name": "Board of Governors of the Federal Reserve System", "url": "https://www.federalreserve.gov/econres/scfindex.htm"}, {"@id": "https://rogueiq.com/#org"}], "isBasedOn": "https://www.federalreserve.gov/econres/files/scfp2025excel.zip", "creditText": "Board of Governors of the Federal Reserve System, 2025 Survey of Consumer Finances; percentiles computed by RogueIQ.", "datePublished": "2026-10-09", "dateModified": "2026-10-22", "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://rogueiq.com/net-worth-by-age/api/v1/networth-by-age?age=35&net_worth=150000"}, {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://rogueiq.com/net-worth-by-age/networth-by-age-2025.csv"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "RogueIQ", "item": "https://rogueiq.com/"}, {"@type": "ListItem", "position": 2, "name": "Net worth by age", "item": "https://rogueiq.com/net-worth-by-age/"}, {"@type": "ListItem", "position": 3, "name": "Net worth 65–74", "item": "https://rogueiq.com/net-worth-by-age/65-74/"}]}]}</script>
+
+  <!-- Inter font from Google Fonts. Only the font file is downloaded; nothing you type is sent. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Archivo:wdth,wght@100,700;100,800;125,800&display=swap" rel="stylesheet">
+
+  <!-- Raven favicon -->
+  <link rel="icon" type="image/png" href="../raven-64.png">
+  <link rel="alternate" type="text/plain" href="https://rogueiq.com/net-worth-by-age/api/llms.txt" title="llms.txt for AI agents">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="https://rogueiq.com/"><span class="mark-wrap" aria-hidden="true"><img src="../raven-64.png" alt="" width="32" height="32"><i class="eye"></i></span>Rogue<span>IQ</span></a>
+    <nav class="gnav" aria-label="Main"><a href="https://rogueiq.com/wire/">The Wire</a><a href="https://rogueiq.com/agents/">Agents</a></nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow"><a href="/net-worth-by-age/">Net worth by age</a> / 65–74</p>
+      <h1>Net worth for families aged 65–74 (Fed 2025 data)</h1>
+      <p class="lede">Median net worth for U.S. families aged 65–74 was $431,300 in 2025, down 4% from $448,600 in 2022 in inflation-adjusted terms, according to the Federal Reserve’s 2025 Survey of Consumer Finances (released Oct 9, 2026).</p>
+      <p class="updated">Data: 2025 SCF, released <time datetime="2026-10-09">Oct 9, 2026</time> · Page updated <time datetime="2026-10-22">Oct 22, 2026</time></p>
+    </section>
+    <section class="card prose">
+      <h2>Median and mean, 2022 and 2025</h2>
+      <div class="tablewrap"><table class="cuts data"><thead><tr><th></th><th>2022</th><th>2025</th><th>Change</th></tr></thead><tbody><tr><td>Median</td><td>$448,600</td><td>$431,300</td><td>−4%</td></tr><tr><td>Mean</td><td>$1,963,900</td><td>$1,897,600</td><td>−3%</td></tr></tbody></table></div>
+      <p class="src">Source: Federal Reserve, 2025 SCF, report Table 2 (released Oct 9, 2026). 2025 dollars.</p>
+      <h2>Percentiles, 2025 (computed by RogueIQ)</h2>
+      <div class="tablewrap"><table class="cuts data"><thead><tr><th>Percentile</th><th>Net worth</th></tr></thead><tbody><tr><td>1st</td><td>−$32,530</td></tr><tr><td>5th</td><td>$0</td></tr><tr><td>10th</td><td>$6,530</td></tr><tr><td>25th</td><td>$118,100</td></tr><tr><td>50th</td><td>$431,900</td></tr><tr><td>75th</td><td>$1,312,100</td></tr><tr><td>90th</td><td>$3,656,000</td></tr><tr><td>95th</td><td>$7,301,050</td></tr><tr><td>99th</td><td>$20,499,000</td></tr></tbody></table></div>
+      <p class="src">Source: computed by RogueIQ from the Federal Reserve’s 2025 SCF Summary Extract, survey-weighted. 2025 dollars. Rounded to the nearest $10. Based on 776 families in the public extract.</p>
+      <p>RogueIQ’s computed median for this group is $431,900, against $431,300 in the Fed’s report; the report uses the Fed’s internal data and the public extract is altered to protect privacy. The top percentiles rest on few families, and the SCF excludes the Forbes 400.</p>
+      <p><a class="btn" href="/net-worth-by-age/">Check where you stand (runs in your browser)</a></p>
+      <p class="links-top">Other age groups: <a href="/net-worth-by-age/under-35/">Under 35</a> · <a href="/net-worth-by-age/35-44/">35–44</a> · <a href="/net-worth-by-age/45-54/">45–54</a> · <a href="/net-worth-by-age/55-64/">55–64</a> · <a href="/net-worth-by-age/75-and-older/">75+</a></p>
+      <p class="links-top"><a href="/net-worth-by-age/#methodology">How we calculate percentiles</a> · <a href="/agents/#networth">Use this data from your AI agent (free MCP + API)</a></p>
+    </section>
+    <footer class="footer">
+      <p class="disclaimer">
+        <strong>For education only. Not financial advice.</strong>
+        This tool shows how survey data is distributed. It does not judge your finances
+        or tell you what to do with your money.
+      </p>
+      <p>
+        Source: Board of Governors of the Federal Reserve System,
+        <a href="https://www.federalreserve.gov/econres/scfindex.htm" target="_blank" rel="noopener">2025 Survey of Consumer Finances</a>
+        (released Oct 9, 2026). All figures in <strong>2025 dollars</strong>, by age of the family's reference person.
+        Median and mean:
+        <a href="https://www.federalreserve.gov/econres/files/scf2025_tables_public_real_historical.xlsx" target="_blank" rel="noopener">SCF historical tables (public data), Table 4</a>.
+        Percentiles: computed by @rogueiq from the Fed's
+        <a href="https://www.federalreserve.gov/econres/files/scfp2025excel.zip" target="_blank" rel="noopener">2025 SCF Summary Extract</a>
+        using the survey weights (the same method reproduces the Fed's Table 4 medians and means).
+        The Fed does not publish percentile cut-offs by age. The SCF excludes the Forbes 400.
+        "Compare against" filters (couple/single, kids, home, education, 2024 income, work status) are
+        also computed by @rogueiq from the Summary Extract. Groups with fewer than 100 survey families are
+        widened or not shown. Official all-ages figures in the footnotes are from Table 4.
+      </p>
+      <p class="agents">For AI agents: <a href="https://rogueiq.com/net-worth-by-age/api/llms.txt">llms.txt</a> · <a href="https://rogueiq.com/agents/">API and MCP</a></p>
+      <p class="tag">@rogueiq</p>
+    </footer>
+  </main>
+</body>
+</html>
