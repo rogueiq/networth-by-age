@@ -223,3 +223,15 @@ input.slider{border:0 !important;background:transparent !important;padding:0 !im
 .wordmark { font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
 .wordmark span { color: var(--accent); }
 .hero h1 { background: linear-gradient(90deg, var(--text) 55%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* RogueIQ brand (Oct 2026): raven mark, Archivo, grain + glow */
+.topbar{display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto}
+.wordmark{display:inline-flex;align-items:center;font-family:'Archivo',var(--font);font-stretch:125%;font-weight:800;letter-spacing:-.005em}
+.mark-wrap{position:relative;display:inline-block;width:32px;height:32px;margin-right:8px}.mark-wrap img{width:32px;height:32px;display:block}
+.eye{position:absolute;left:54%;top:31%;width:3.5px;height:3.5px;margin:-1.75px 0 0 -1.75px;border-radius:50%;background:#FF6A1A;animation:eyepulse 3.5s ease-in-out infinite}
+@keyframes eyepulse{0%,100%{background:#FF6A1A;box-shadow:0 0 3px 1px rgba(255,106,26,.5)}50%{background:#FFC08A;box-shadow:0 0 6px 2px rgba(255,140,60,.95),0 0 14px 5px rgba(255,106,26,.45)}}
+@media(prefers-reduced-motion:reduce){.eye{animation:none;box-shadow:0 0 6px 2px rgba(255,106,26,.7)}}
+.gnav a{color:var(--muted,#9A948C);text-decoration:none;margin-left:18px;font-size:14px}.gnav a:hover{color:var(--text)}
+h1,h2,h3{font-family:'Archivo',var(--font);font-stretch:100%}h1{font-weight:800;letter-spacing:-.03em}h2,h3{font-weight:700}
+body{background-image:radial-gradient(60rem 32rem at 30% -8rem,rgba(34,230,208,.08),transparent 70%),radial-gradient(28rem 18rem at 85% 4rem,rgba(255,106,26,.04),transparent 70%);background-repeat:no-repeat}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
