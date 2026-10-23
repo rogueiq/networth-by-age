@@ -36,7 +36,7 @@
 <body>
   <header class="topbar">
     <a class="wordmark" href="https://rogueiq.com/"><span class="mark-wrap" aria-hidden="true"><img src="raven-64.png" alt="" width="32" height="32"><i class="eye"></i></span>Rogue<span>IQ</span></a>
-    <nav class="gnav" aria-label="Main"><a href="https://rogueiq.com/wire/">The Wire</a><a href="https://rogueiq.com/agents/">Agents</a></nav>
+    <nav class="gnav" aria-label="Main"><a href="/wire/">The Wire</a><a href="/net-worth-by-age/">Net worth by age</a><a href="/agents/">Agents</a></nav>
   </header>
 
   <main class="container">
@@ -155,7 +155,7 @@
       <p>The Fed doesn’t publish percentiles by age. RogueIQ computed these from the Fed’s public Summary Extract using the survey weights; the live API returns the same numbers.</p>
       <div class="tablewrap"><table class="cuts data"><thead><tr><th>Age</th><th>25th</th><th>50th</th><th>75th</th><th>90th</th><th>99th</th></tr></thead><tbody><tr><td>Under 35</td><td>$3,100</td><td>$32,820</td><td>$145,090</td><td>$351,200</td><td>$1,591,230</td></tr><tr><td>35–44</td><td>$18,000</td><td>$156,000</td><td>$467,520</td><td>$1,233,620</td><td>$8,346,100</td></tr><tr><td>45–54</td><td>$54,730</td><td>$254,670</td><td>$941,970</td><td>$2,557,390</td><td>$14,050,600</td></tr><tr><td>55–64</td><td>$71,790</td><td>$411,340</td><td>$1,416,200</td><td>$3,457,640</td><td>$20,072,200</td></tr><tr><td>65–74</td><td>$118,100</td><td>$431,900</td><td>$1,312,100</td><td>$3,656,000</td><td>$20,499,000</td></tr><tr><td>75 or older</td><td>$144,060</td><td>$504,600</td><td>$1,417,000</td><td>$4,188,260</td><td>$20,337,060</td></tr></tbody></table></div>
       <p class="src">Source: computed by RogueIQ from the Federal Reserve’s 2025 SCF Summary Extract, survey-weighted. 2025 dollars. Rounded to the nearest $10.</p>
-      <p>These computed figures differ a little from the Fed’s report. The report uses the Fed’s final internal data, while the public extract is altered to protect respondents’ privacy (Fed report, Appendices A and B). RogueIQ’s computed medians match the Fed’s public-data historical tables (Table 4). Where the report publishes a figure, use the report figure.</p>
+      <p>These computed figures differ a little from the Fed’s report. The report uses the Fed’s final internal data, while the public extract is altered to protect respondents’ privacy (Fed report, Appendices A and B). RogueIQ’s computed medians and means match the Fed’s public-data historical tables (Table 4, 2025 columns, published to the nearest $10) for every age group and for all families. Where the report publishes a figure, use the report figure.</p>
       <div class="tablewrap"><table class="cuts data"><thead><tr><th>Age</th><th>Fed median (report)</th><th>RogueIQ median (extract)</th><th>Fed mean (report)</th><th>RogueIQ mean (extract)</th></tr></thead><tbody><tr><td>Under 35</td><td>$33,000</td><td>$32,820</td><td>$135,400</td><td>$135,720</td></tr><tr><td>35–44</td><td>$155,600</td><td>$156,000</td><td>$681,900</td><td>$669,310</td></tr><tr><td>45–54</td><td>$253,700</td><td>$254,670</td><td>$1,244,500</td><td>$1,243,610</td></tr><tr><td>55–64</td><td>$411,900</td><td>$411,340</td><td>$1,878,000</td><td>$1,871,020</td></tr><tr><td>65–74</td><td>$431,300</td><td>$431,900</td><td>$1,897,600</td><td>$1,870,920</td></tr><tr><td>75 or older</td><td>$504,900</td><td>$504,600</td><td>$1,962,200</td><td>$1,949,710</td></tr></tbody></table></div>
       <p>The 99th percentile rests on few survey families (about 16 per imputed copy of the data for families under 35), and the SCF excludes people on the Forbes 400 list, so treat the top tail as rough.</p>
       <p class="links-top">By age group: <a href="/net-worth-by-age/under-35/">Net worth under 35</a> · <a href="/net-worth-by-age/35-44/">Net worth 35–44</a> · <a href="/net-worth-by-age/45-54/">Net worth 45–54</a> · <a href="/net-worth-by-age/55-64/">Net worth 55–64</a> · <a href="/net-worth-by-age/65-74/">Net worth 65–74</a> · <a href="/net-worth-by-age/75-and-older/">Net worth 75 and older</a></p>
@@ -222,6 +222,8 @@
     </script>    <!-- /SEO:BODY -->
 
     <!-- ===== Email signup placeholder (NOT connected; hidden until Alan picks a provider) ===== -->
+    <!-- Kept inside <template> so browsers, crawlers and reader views render none of it. Move it out to show it again. -->
+    <template id="signup-placeholder">
     <section class="card signup" hidden>
       <h2>Get the weekly breakdown</h2>
       <p>Charts and plain-English explainers on long-term investing, from @rogueiq.</p>
@@ -232,6 +234,7 @@
       </form>
       <p id="signup-msg" class="hint" role="status">Coming soon. Signup isn't connected yet, so nothing is sent.</p>
     </section>
+    </template>
 
     <!-- ===== Disclaimer + sources ===== -->
     <footer class="footer">

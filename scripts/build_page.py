@@ -179,7 +179,7 @@ def body():
       <p>The Fed doesn’t publish percentiles by age. RogueIQ computed these from the Fed’s public Summary Extract using the survey weights; the live API returns the same numbers.</p>
       {table(["Age", "25th", "50th", "75th", "90th", "99th"], rows_b)}
       <p class="src">{SRC_X} Rounded to the nearest $10.</p>
-      <p>These computed figures differ a little from the Fed’s report. The report uses the Fed’s final internal data, while the public extract is altered to protect respondents’ privacy (Fed report, Appendices A and B). RogueIQ’s computed medians match the Fed’s public-data historical tables (Table 4). Where the report publishes a figure, use the report figure.</p>
+      <p>These computed figures differ a little from the Fed’s report. The report uses the Fed’s final internal data, while the public extract is altered to protect respondents’ privacy (Fed report, Appendices A and B). RogueIQ’s computed medians and means match the Fed’s public-data historical tables (Table 4, 2025 columns, published to the nearest $10) for every age group and for all families. Where the report publishes a figure, use the report figure.</p>
       {table(["Age", "Fed median (report)", "RogueIQ median (extract)", "Fed mean (report)", "RogueIQ mean (extract)"], rows_g)}
       <p>The 99th percentile rests on few survey families (about 16 per imputed copy of the data for families under 35), and the SCF excludes people on the Forbes 400 list, so treat the top tail as rough.</p>
       <p class="links-top">By age group: {brk}</p>

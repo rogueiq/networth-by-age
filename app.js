@@ -324,7 +324,7 @@ function rank_interp(value, cuts) {
 
 // ---------- Email signup placeholder ----------
 // Not connected to anything. Pressing the button only shows a "coming soon" note.
-document.getElementById("signup").addEventListener("submit", (event) => {
+document.getElementById("signup")?.addEventListener("submit", (event) => {
   event.preventDefault();
   document.getElementById("signup-msg").textContent =
     "Coming soon. This signup isn't connected yet, so your email was not sent or saved.";
